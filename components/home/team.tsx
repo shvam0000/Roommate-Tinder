@@ -4,15 +4,15 @@ const team = [
     imgurl: 'https://avatars.githubusercontent.com/u/32397288?v=4',
   },
   {
-    name: 'Shivam Shekhar',
+    name: 'Anna Nefedenkova',
     imgurl: 'https://avatars.githubusercontent.com/u/32397288?v=4',
   },
   {
-    name: 'Shivam Shekhar',
+    name: 'Kevin Shi',
     imgurl: 'https://avatars.githubusercontent.com/u/32397288?v=4',
   },
   {
-    name: 'Shivam Shekhar',
+    name: 'Ameya Mallya',
     imgurl: 'https://avatars.githubusercontent.com/u/32397288?v=4',
   },
 ];
