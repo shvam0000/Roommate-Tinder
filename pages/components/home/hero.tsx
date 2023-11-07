@@ -1,9 +1,10 @@
 import React from 'react';
-import { Team } from '.';
+import { Faq, Team } from '.';
 
 const Hero = () => {
   return (
     <div>
+      <Faq />
       <Team />
     </div>
   );
