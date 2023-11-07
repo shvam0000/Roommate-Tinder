@@ -1,7 +1,6 @@
 import React from 'react';
 import { Faq, Team } from '.';
 import man from '@/utils/images/man.png';
-import sec2 from '@/utils/images/sec2.png';
 import Image from 'next/image';
 
 const Hero = () => {
