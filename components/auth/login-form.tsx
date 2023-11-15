@@ -17,7 +17,7 @@ const AuthForm = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-[#F65B5B] md:text-2xl ">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <div className="space-y-4 md:space-y-6">
                 <div>
                   <label
                     htmlFor="email"
@@ -53,7 +53,7 @@ const AuthForm = () => {
                   className="w-full text-white bg-[#F65B5B]  font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                   Sign in
                 </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
