@@ -36,7 +36,7 @@ const AuthForm = () => {
     event.preventDefault();
 
     authenticate(email, password)
-      .then((data) => {
+      .then((data: any) => {
         console.log('data', data);
         router.replace('/profile');
         //! We need to get all the user data from the Dynamo DB
