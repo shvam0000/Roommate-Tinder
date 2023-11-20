@@ -1,12 +1,19 @@
-const bodyParser = require('body-parser');
 const express = require('express');
-const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
+const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('dev'));
 
-app.get('/healthcheck', (req, res) => {
-  res.send('API Works');
+const userRoutes = require('./routes/users');
+
+app.use('/user', userRoutes);
+
+app.get('/check', (req, res) => {
+  return res.status(200).json({ message: 'API working' });
 });
 
 app.listen(8080, () => {
