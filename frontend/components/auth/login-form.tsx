@@ -36,14 +36,12 @@ const AuthForm = () => {
     event.preventDefault();
 
     authenticate(email, password)
-      .then((data: any) => {
-        // check is the email is verified
-        console.log(data);
+      .then((data) => {
+        console.log('data', data);
         router.replace('/profile');
-        // We need to get all the user data from the Dynamo DB
+        //! We need to get all the user data from the Dynamo DB
       })
       .catch((err: any) => {
-        // console.error('error', err);
         handleAWSError(err);
       });
   };

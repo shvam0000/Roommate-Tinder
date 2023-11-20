@@ -1,11 +1,12 @@
 import Hero from '@/components/auth/hero';
+import { Layout } from '@/layout';
 import React from 'react';
 
 const Auth = () => {
   return (
-    <div>
+    <Layout>
       <Hero />
-    </div>
+    </Layout>
   );
 };
 

@@ -6,6 +6,7 @@ const AccountContext = createContext();
 
 const Account = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [clientID, setClientID] = useState('');
 
   useEffect(() => {
     checkAuthentication();
@@ -50,7 +51,10 @@ const Account = ({ children }) => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (data) => {
-          console.log('onSuccess: ', data);
+          console.log('onSuccess: ', data.getAccessToken().payload.client_id);
+          setClientID(data.getAccessToken().payload.client_id);
+          console.log(clientID);
+          sessionStorage.setItem('access_id', clientID);
           resolve(data);
           setIsAuthenticated(true);
         },
@@ -71,6 +75,7 @@ const Account = ({ children }) => {
     const user = Pool.getCurrentUser();
     if (user) {
       user.signOut();
+      sessionStorage.clear();
       setIsAuthenticated(false);
     }
   };

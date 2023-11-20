@@ -9,12 +9,12 @@ const chat = [
     lastMsg: 'Hey, how are you?',
   },
   {
-    name: 'Sam',
+    name: 'Sam1',
     imgUrl: man,
     lastMsg: 'Hey, how are you?',
   },
   {
-    name: 'Sam',
+    name: 'Sam2',
     imgUrl: man,
     lastMsg: 'Hey, how are you?',
   },

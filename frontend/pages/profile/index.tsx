@@ -1,10 +1,15 @@
+import { ProtectedRoute } from '@/components/auth';
 import { Hero } from '@/components/profile';
-import React from 'react';
+import { Layout } from '@/layout';
 
 const Profile = () => {
   return (
     <div>
-      <Hero />
+      <Layout>
+        <ProtectedRoute>
+          <Hero />
+        </ProtectedRoute>
+      </Layout>
     </div>
   );
 };
