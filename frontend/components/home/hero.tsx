@@ -16,7 +16,13 @@ const Hero = () => {
           </button>
         </div>
         <figure>
-          <Image src={man} alt="hero" className="w-full" />
+          <Image
+            src={man}
+            alt="hero"
+            height={500}
+            width={500}
+            className="w-full"
+          />
         </figure>
       </div>
       <Faq />
