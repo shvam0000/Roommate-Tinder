@@ -1,80 +1,12 @@
 import React, { useState } from 'react';
 import man from '@/utils/images/man.png';
 import Image from 'next/image';
+import { Edit } from '@/utils/icons';
+import Modal from 'react-lean-modal';
+import { EditProfile } from '.';
 
 const Hero = () => {
-  const [formData, setFormData] = useState({
-    id:
-      typeof window !== 'undefined'
-        ? localStorage.getItem(
-            'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
-          ) || ''
-        : '',
-    area: '',
-    age: '',
-    minPrice: '',
-    maxPrice: '',
-    interests: '',
-    morningPerson: false,
-    eveningPerson: false,
-    drinking: false,
-    smoking: false,
-    pets: false,
-    messy: false,
-    clean: false,
-    mixedGender: false,
-    vegetarian: false,
-  });
-
-  // useEffect(() => {
-  //   // Fetch initial data for the form (if needed)
-  //   // Example: Fetching user preferences from the backend
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await fetch('YOUR_API_ENDPOINT');
-  //       if (response.ok) {
-  //         const userData = await response.json();
-  //         setFormData(userData);
-  //       } else {
-  //         console.error('Failed to fetch user data.');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, []); // Empty dependency array means this effect runs once on component mount
-
-  const handleChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      // Replace 'YOUR_API_ENDPOINT' with the actual endpoint of your backend API
-      const response = await fetch('http://localhost:8080/user/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        console.log('Form submitted successfully!');
-      } else {
-        console.error('Failed to submit form.');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-  };
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="flex p-10 justify-around">
       <div>
@@ -101,64 +33,76 @@ const Hero = () => {
           </h1>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
+      <div>
         <div>
-          <h1 className="text-3xl font-bold pb-5">Interests/Preferences</h1>
+          <h1 className="text-3xl flex justify-start items-center font-bold pb-5 px-5">
+            <span>Interests/Preferences</span>
+            <button
+              onClick={() => setShowModal(!showModal)}
+              className="pl-10 text-[#F65B5B] text-medium">
+              <Edit />
+            </button>
+          </h1>
           <div className="flex">
-            <div>
+            <div className="px-5">
               <label htmlFor="area">Area</label>
               <input
                 type="text"
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="Manhattan"
+                disabled
               />
             </div>
-            <div>
+            <div className="px-5">
               <label htmlFor="age">Age</label>
               <input
                 type="text"
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="25"
+                disabled
               />
             </div>
           </div>
-          <div className="pt-2">Price</div>
-          <div className="flex">
-            <div>
-              <label htmlFor="minPrice">min</label>
+
+          <div className="flex pt-2">
+            <div className="px-5">
+              <label htmlFor="minPrice">Minimum Price</label>
               <input
                 type="number"
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$0"
+                disabled
               />
             </div>
-            <div>
-              <label htmlFor="age">max</label>
+            <div className="px-5">
+              <label htmlFor="age">Maximum Price</label>
               <input
                 type="number"
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$25"
+                disabled
               />
             </div>
           </div>
           <div className="py-2">
-            <div>
+            <div className="px-5">
               <label htmlFor="area">Interests</label>
               <input
                 type="text"
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="Playing Squash, Reading"
+                disabled
               />
             </div>
           </div>
           <div>
-            <div className="flex justify-evenly pt-5">
+            <div className="flex justify-start px-5 pt-5">
               <div>
                 <div className="flex items-center">
                   <input
                     id="morning-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -171,7 +115,7 @@ const Hero = () => {
                   <input
                     id="evening-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -184,7 +128,7 @@ const Hero = () => {
                   <input
                     id="drinking-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -197,7 +141,7 @@ const Hero = () => {
                   <input
                     id="smoking-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -210,7 +154,7 @@ const Hero = () => {
                   <input
                     id="link-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -220,12 +164,12 @@ const Hero = () => {
                   </label>
                 </div>
               </div>
-              <div>
+              <div className="pl-5">
                 <div className="flex items-center">
                   <input
                     id="messy-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -238,7 +182,7 @@ const Hero = () => {
                   <input
                     id="link-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -251,7 +195,7 @@ const Hero = () => {
                   <input
                     id="link-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -264,7 +208,7 @@ const Hero = () => {
                   <input
                     id="link-checkbox"
                     type="checkbox"
-                    value=""
+                    disabled
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -277,12 +221,16 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="bg-[#F65B5B] text-white py-2 px-5 rounded-lg">
-          Submit
-        </button>
-      </form>
+      </div>
+      <Modal
+        enterAnimation="fade"
+        exitAnimation="fade"
+        timeout={250}
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        titleElement={<h3>Preferences</h3>}>
+        <EditProfile />
+      </Modal>
     </div>
   );
 };
