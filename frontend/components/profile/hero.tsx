@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Edit } from '@/utils/icons';
 import Modal from 'react-lean-modal';
 import { EditProfile } from '.';
+
 import axios from 'axios';
 
 const Hero = () => {
@@ -25,6 +26,11 @@ const Hero = () => {
         console.log(err);
       });
   }, []);
+
+
+
+const Hero = () => {
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="flex p-10 justify-around">
@@ -70,7 +76,10 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="Manhattan"
                 disabled
+
                 value={userData.area}
+
+
               />
             </div>
             <div className="px-5">
@@ -80,7 +89,10 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="25"
                 disabled
+
                 value={userData.age}
+
+
               />
             </div>
           </div>
@@ -93,7 +105,9 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$0"
                 disabled
+
                 value={userData.minPrice}
+
               />
             </div>
             <div className="px-5">
@@ -103,7 +117,9 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$25"
                 disabled
+
                 value={userData.maxPrice}
+
               />
             </div>
           </div>

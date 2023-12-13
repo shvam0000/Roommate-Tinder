@@ -16,9 +16,11 @@ const EditProfile = () => {
   const [clean, setClean] = useState(false);
   const [mixGender, setMixGender] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
+  
   const id = localStorage.getItem(
     'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
   );
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ const EditProfile = () => {
     };
 
     try {
+      
       const response = await fetch(
         'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/add-user',
         {
@@ -52,6 +55,7 @@ const EditProfile = () => {
           body: JSON.stringify(data),
         }
       );
+
 
       if (response.ok) {
         console.log('Profile submitted successfully');
