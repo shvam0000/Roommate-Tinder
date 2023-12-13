@@ -63,42 +63,6 @@ router.post('/submit-form', async (req, res) => {
   });
 });
 
-// store user data in DB while signup
-router.post('/signup', async (req, res) => {
-  const {
-    email,
-    firstName,
-    lastName,
-    owner_type,
-    address,
-    comapany_name,
-    userId,
-  } = req.body;
-
-  const params = {
-    TableName: tableName,
-    Item: {
-      userId: userId,
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      owner_type: owner_type,
-      address: address,
-      comapany_name: comapany_name,
-    },
-  };
-
-  dynamoDBClient.put(params, (err) => {
-    if (err) {
-      console.error('Error creating item:', err);
-      res.status(500).json({ error: 'Failed to create item' });
-    } else {
-      console.log('Item created successfully');
-      res.sendStatus(201);
-    }
-  });
-});
-
 // fetch all the users
 router.get('/users', (req, res) => {
   // Define the scan parameters
