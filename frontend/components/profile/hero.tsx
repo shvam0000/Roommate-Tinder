@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import man from '@/utils/images/man.png';
 import Image from 'next/image';
 import { Edit } from '@/utils/icons';
 import Modal from 'react-lean-modal';
 import { EditProfile } from '.';
+import axios from 'axios';
 
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    const id = localStorage.getItem(
+      'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+    );
+    axios(
+      `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/user?id=${id}`
+    )
+      .then((res) => {
+        console.log(res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="flex p-10 justify-around">
       <div>
@@ -51,6 +70,7 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="Manhattan"
                 disabled
+                value={userData.area}
               />
             </div>
             <div className="px-5">
@@ -60,6 +80,7 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="25"
                 disabled
+                value={userData.age}
               />
             </div>
           </div>
@@ -72,6 +93,7 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$0"
                 disabled
+                value={userData.minPrice}
               />
             </div>
             <div className="px-5">
@@ -81,6 +103,7 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="$25"
                 disabled
+                value={userData.maxPrice}
               />
             </div>
           </div>
@@ -92,6 +115,7 @@ const Hero = () => {
                 className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
                 placeholder="Playing Squash, Reading"
                 disabled
+                value={userData.interests}
               />
             </div>
           </div>
@@ -103,6 +127,7 @@ const Hero = () => {
                     id="morning-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.morningPerson}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -116,6 +141,7 @@ const Hero = () => {
                     id="evening-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.eveningPerson}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -129,6 +155,7 @@ const Hero = () => {
                     id="drinking-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.drinking}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -142,6 +169,7 @@ const Hero = () => {
                     id="smoking-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.smoking}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -155,6 +183,7 @@ const Hero = () => {
                     id="link-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.pets}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -170,6 +199,7 @@ const Hero = () => {
                     id="messy-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.messy}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -183,6 +213,7 @@ const Hero = () => {
                     id="link-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.clean}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -196,6 +227,7 @@ const Hero = () => {
                     id="link-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.mixedGender}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
@@ -209,6 +241,7 @@ const Hero = () => {
                     id="link-checkbox"
                     type="checkbox"
                     disabled
+                    value={userData.vegetarian}
                     className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label

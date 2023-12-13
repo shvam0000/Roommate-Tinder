@@ -23,25 +23,25 @@ const Navbar = () => {
           {isAuthenticated ? (
             <div>
               <Link href="/match" className="px-2">
-                <button className="bg-[#F65B5B] px-5 py-2 rounded-full text-white text-md">
+                <button className="mx-5 px-3 py-2 border-b-2 hover:border-[#F65B5B]  text-black text-md">
                   Search Roommates
                 </button>
               </Link>
               <Link href="/profile" className="px-2">
-                <button className="bg-[#F65B5B] px-5 py-2 rounded-full text-white text-md">
+                <button className="mx-5 px-3 py-2 border-b-2 hover:border-[#F65B5B]  text-black text-md">
                   Profile
                 </button>
               </Link>
 
               <button
                 onClick={() => handleSingout()}
-                className="bg-[#F65B5B] px-5 py-2 rounded-full text-white text-md">
+                className="mx-5 py-2 px-3 border-b-2 hover:border-[#F65B5B] focus:border- text-black text-md">
                 Logout
               </button>
             </div>
           ) : (
             <Link href="/auth" className="px-2">
-              <button className="bg-[#F65B5B] px-5 py-2 rounded-full text-white text-md">
+              <button className="mx-5 py-2 px-3 border-b-2 hover:border-[#F65B5B] focus:border- text-black text-md">
                 Login
               </button>
             </Link>
