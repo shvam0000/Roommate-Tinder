@@ -65,6 +65,28 @@ const Hero = () => {
           </h1>
           <div className="flex">
             <div className="px-5">
+              <label htmlFor="fname">First Name</label>
+              <input
+                type="text"
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+                placeholder="John"
+                disabled
+                value={userData.firstName}
+              />
+            </div>
+            <div className="px-5">
+              <label htmlFor="lname">Last Name</label>
+              <input
+                type="text"
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+                placeholder="Doe"
+                disabled
+                value={userData.lastName}
+              />
+            </div>
+          </div>
+          <div className="flex">
+            <div className="px-5">
               <label htmlFor="area">Area</label>
               <input
                 type="text"

@@ -5,6 +5,8 @@ const EditProfile = () => {
   const [age, setAge] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
   const [interests, setInterests] = useState('');
 
   const [morningPerson, setMorningPerson] = useState(false);
@@ -16,17 +18,18 @@ const EditProfile = () => {
   const [clean, setClean] = useState(false);
   const [mixGender, setMixGender] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
-  
+
   const id = localStorage.getItem(
     'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
   );
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data = {
       id,
+      firstName,
+      lastName,
       area,
       age,
       minPrice,
@@ -44,7 +47,6 @@ const EditProfile = () => {
     };
 
     try {
-      
       const response = await fetch(
         'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/add-user',
         {
@@ -55,7 +57,6 @@ const EditProfile = () => {
           body: JSON.stringify(data),
         }
       );
-
 
       if (response.ok) {
         console.log('Profile submitted successfully');
@@ -74,15 +75,42 @@ const EditProfile = () => {
       <form onSubmit={handleSubmit} className="w-3/4 mx-auto">
         <div className="flex py-2">
           <div className="px-5">
-            <label htmlFor="area">Area</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
-              id="area"
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setfirstName(e.target.value)}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
+          <div className="px-5">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setlastName(e.target.value)}
+              className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+            />
+          </div>
+        </div>
+        <div className="flex py-2">
+          <div className="px-5">
+            <label htmlFor="area">Area</label>
+            <select
+              id="area"
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
+              className="border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600">
+              <option value="">Select an area</option>
+              <option value="Manhattan">Manhattan</option>
+              <option value="Queens">Queens</option>
+              <option value="Brooklyn">Brooklyn</option>
+              <option value="Bronx">Bronx</option>
+            </select>
+          </div>
+
           <div className="px-5">
             <label htmlFor="age">Age</label>
             <input
