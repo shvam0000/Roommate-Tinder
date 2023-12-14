@@ -8,13 +8,13 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb', region_name=region)
     table = dynamodb.Table(table_name)
 
-    # Assuming the user ID is passed as a path parameter
-    id = event.get('pathParameters', {}).get('id')
+    # Assuming the user ID is passed as a query string parameter
+    id = event.get('queryStringParameters', {}).get('id')
 
     if not id:
         return {
             'statusCode': 400,
-            'body': 'Missing id in path parameters',
+            'body': 'Missing id in query string parameters',
             'headers': {
                 'Content-Type': 'application/json'
             }
@@ -29,8 +29,10 @@ def lambda_handler(event, context):
             Key={
                 'id': id
             },
-            UpdateExpression='SET #area = :area, #age = :age, #minPrice = :minPrice, #maxPrice = :maxPrice, #interests = :interests, #morningPerson = :morningPerson, #eveningPerson = :eveningPerson, #drinking = :drinking, #smoking = :smoking, #pets = :pets, #messy = :messy, #clean = :clean, #mixedGender = :mixedGender, #vegetarian = :vegetarian',
+            UpdateExpression='SET #firstName = :firstName, #lastName = :lastName, #area = :area, #age = :age, #minPrice = :minPrice, #maxPrice = :maxPrice, #interests = :interests, #morningPerson = :morningPerson, #eveningPerson = :eveningPerson, #drinking = :drinking, #smoking = :smoking, #pets = :pets, #messy = :messy, #clean = :clean, #mixedGender = :mixedGender, #vegetarian = :vegetarian',
             ExpressionAttributeNames={
+                '#firstName' = 'firstName',
+                '#lastName' = 'lastName',
                 '#area': 'area',
                 '#age': 'age',
                 '#minPrice': 'minPrice',
@@ -47,6 +49,8 @@ def lambda_handler(event, context):
                 '#vegetarian': 'vegetarian'
             },
             ExpressionAttributeValues={
+                ':firstName': updated_user_data.get('firstName'),
+                ':lastName': updated_user_data.get('lastName'),
                 ':area': updated_user_data.get('area'),
                 ':age': updated_user_data.get('age'),
                 ':minPrice': updated_user_data.get('minPrice'),

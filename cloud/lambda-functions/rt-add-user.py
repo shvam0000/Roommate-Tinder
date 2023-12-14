@@ -5,6 +5,8 @@ def lambda_handler(event, context):
 
     # Access individual fields
     id = user_data.get('id')
+    firstName = user_data.get('firstName')
+    lastName = user_data.get('lastName')
     area = user_data.get('area')
     age = user_data.get('age')
     minPrice = user_data.get('minPrice')
@@ -26,6 +28,8 @@ def lambda_handler(event, context):
     table.put_item(
         Item={
             'id': id,
+            'firstName': firstName,
+            'lastName': lastName,
             'area': area,
             'age': age,
             'minPrice': minPrice,

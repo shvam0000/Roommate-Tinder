@@ -26,7 +26,7 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(formatted_items, cls=DecimalEncoder),
+        'body': formatted_items,  # Returning the Python object directly
         'headers': {
             'Content-Type': 'application/json'
         }
