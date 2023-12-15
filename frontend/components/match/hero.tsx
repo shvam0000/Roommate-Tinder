@@ -54,7 +54,7 @@ const Hero = () => {
           id: localStorage.getItem(
             'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
           ),
-          likedUserId: userId,
+          dislikedUserId: userId,
         }
       )
       .then((res) => {
