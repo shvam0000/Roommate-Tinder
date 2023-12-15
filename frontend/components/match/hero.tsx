@@ -11,18 +11,56 @@ const Hero = () => {
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(true);
 
+  const handleLike = (userId) => {
+    axios
+      .post(
+        'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/like',
+        {
+          id: localStorage.getItem(
+            'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+          ),
+          likedUserId: userId,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDislike = (userId) => {
+    axios
+      .post(
+        'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/dislike',
+        {
+          id: localStorage.getItem(
+            'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+          ),
+          likedUserId: userId,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     axios(
       'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/users'
     )
       .then((res) => {
-        console.log(res.data.body);
+        // console.log(res.data.body);
         setUsers(res.data.body);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
       });
   }, []);
 
@@ -42,12 +80,16 @@ const Hero = () => {
                   </figure>
                   <div className="flex justify-center">
                     <Link href="/match">
-                      <figure className="px-2 py-2">
+                      <figure
+                        className="px-2 py-2"
+                        onClick={() => handleDislike(user.id, 'dislike')}>
                         <Image src={dislike} alt="dislike" />
                       </figure>
                     </Link>
                     <Link href="/match">
-                      <figure className="px-2 py-2">
+                      <figure
+                        className="px-2 py-2"
+                        onClick={() => handleLike(user.id)}>
                         <Image src={like} alt="like" />
                       </figure>
                     </Link>
