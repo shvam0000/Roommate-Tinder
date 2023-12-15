@@ -2,24 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const EditProfile = () => {
-  const [area, setArea] = useState('');
-  const [age, setAge] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [firstName, setfirstName] = useState('');
-  const [lastName, setlastName] = useState('');
-  const [interests, setInterests] = useState('');
   const [userData, setUserData] = useState();
-
-  const [morningPerson, setMorningPerson] = useState(false);
-  const [eveningPerson, setEveningPerson] = useState(false);
-  const [drinking, setDrinking] = useState(false);
-  const [smoking, setSmoking] = useState(false);
-  const [pets, setPets] = useState(false);
-  const [messy, setMessy] = useState(false);
-  const [clean, setClean] = useState(false);
-  const [mixGender, setMixGender] = useState(false);
-  const [vegetarian, setVegetarian] = useState(false);
 
   const id = localStorage.getItem(
     'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
@@ -43,9 +26,24 @@ const EditProfile = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const firstName = e.target.firstName.value;
+    const lastName = e.target.lastName.value;
+    const area = e.target.area.value;
+    const age = e.target.age.value;
+    const minPrice = e.target.minPrice.value;
+    const maxPrice = e.target.maxPrice.value;
+    const interests = e.target.interests.value;
+    const morningPerson = e.target.morningPerson.value;
+    const eveningPerson = e.target.eveningPerson.value;
+    const drinking = e.target.drinking.value;
+    const smoking = e.target.smoking.value;
+    const pets = e.target.pets.value;
+    const messy = e.target.messy.value;
+    const clean = e.target.clean.value;
+    const mixedGender = e.target.mixedGender.value;
+    const vegetarian = e.target.vegetarian.value;
 
     const data = {
-      id,
       firstName,
       lastName,
       area,
@@ -60,15 +58,15 @@ const EditProfile = () => {
       pets,
       messy,
       clean,
-      mixGender,
+      mixedGender,
       vegetarian,
     };
 
     try {
       const response = await fetch(
-        'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/add-user',
+        `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/update-user?id=${id}`,
         {
-          method: 'POST',
+          method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -79,6 +77,7 @@ const EditProfile = () => {
       if (response.ok) {
         console.log('Profile submitted successfully');
         // You can handle success, such as redirecting or showing a success message
+        window.location.reload();
       } else {
         console.error('Failed to submit profile');
         // Handle error, show an error message, etc.
@@ -97,8 +96,8 @@ const EditProfile = () => {
             <input
               type="text"
               id="firstName"
-              value={firstName}
-              onChange={(e) => setfirstName(e.target.value)}
+              name="firstName"
+              defaultValue={userData?.firstName}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
@@ -107,35 +106,41 @@ const EditProfile = () => {
             <input
               type="text"
               id="lastName"
-              value={lastName}
-              onChange={(e) => setlastName(e.target.value)}
+              name="lastName"
+              defaultValue={userData?.lastName}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
         </div>
         <div className="flex py-2">
           <div className="px-5">
-            <label htmlFor="area">Area</label>
-            <select
+            <label htmlFor="area">
+              Area <br />
+              <span className="text-xs text-gray-500">
+                (Manhattan or Brooklyn or Bronx or Queens)
+              </span>
+            </label>
+            <input
+              type="text"
               id="area"
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
-              className="border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600">
-              <option value="">Select an area</option>
-              <option value="Manhattan">Manhattan</option>
-              <option value="Queens">Queens</option>
-              <option value="Brooklyn">Brooklyn</option>
-              <option value="Bronx">Bronx</option>
-            </select>
+              name="area"
+              defaultValue={userData?.area}
+              className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+            />
           </div>
 
           <div className="px-5">
-            <label htmlFor="age">Age</label>
+            <label htmlFor="age">
+              <br />
+              Age
+              <br />
+              <span className="text-xs text-gray-500"> </span>
+            </label>
             <input
               type="number"
               id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
+              name="age"
+              defaultValue={userData?.age}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
@@ -146,8 +151,8 @@ const EditProfile = () => {
             <input
               type="number"
               id="min-price"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
+              name="minPrice"
+              defaultValue={userData?.minPrice}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
@@ -156,8 +161,8 @@ const EditProfile = () => {
             <input
               type="number"
               id="max-price"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
+              name="maxPrice"
+              defaultValue={userData?.maxPrice}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>
@@ -167,8 +172,8 @@ const EditProfile = () => {
           <input
             type="text"
             id="interests"
-            value={interests}
-            onChange={(e) => setInterests(e.target.value)}
+            name="interests"
+            defaultValue={userData?.interests}
             className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
           />
         </div>
@@ -176,101 +181,139 @@ const EditProfile = () => {
         <div className="px-5 pt-2 flex">
           <div>
             <div className="py-1">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={morningPerson}
-                  onChange={(e) => setMorningPerson(e.target.checked)}
-                />
-                <span className="pl-2">Morning Person</span>
+              <label htmlFor="area">
+                Morning Person
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="morningPerson"
+                name="morningPerson"
+                defaultValue={userData?.morningPerson}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={eveningPerson}
-                  onChange={(e) => setEveningPerson(e.target.checked)}
-                />
-                <span className="pl-2">Evening Person</span>
+                Evening Person
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="eveningPerson"
+                name="eveningPerson"
+                defaultValue={userData?.eveningPerson}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={drinking}
-                  onChange={(e) => setDrinking(e.target.checked)}
-                />
-                <span className="pl-2">Drinking</span>
+                Drinking
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
-            </div>
-            <div className="py-1">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={smoking}
-                  onChange={(e) => setSmoking(e.target.checked)}
-                />
-                <span className="pl-2">Smoking</span>
-              </label>
-            </div>
-            <div className="py-1">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={pets}
-                  onChange={(e) => setPets(e.target.checked)}
-                />
-                <span className="pl-2">Pets</span>
-              </label>
+              <input
+                type="text"
+                id="drinking"
+                name="drinking"
+                defaultValue={userData?.drinking}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
           </div>
           <div className="pl-5">
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={messy}
-                  onChange={(e) => setMessy(e.target.checked)}
-                />
-                <span className="pl-2">Messy</span>
+                Clean
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="clean"
+                name="clean"
+                defaultValue={userData?.clean}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
+            </div>
+            <div className="py-1">
+              <label htmlFor="area">
+                Mixed Gender
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
+              </label>
+              <input
+                type="text"
+                id="mixedGender"
+                name="mixedGender"
+                defaultValue={userData?.mixedGender}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={clean}
-                  onChange={(e) => setClean(e.target.checked)}
-                />
-                <span className="pl-2">Clean</span>
+                Smoking
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="smoking"
+                name="smoking"
+                defaultValue={userData?.smoking}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
+            </div>
+          </div>
+          <div className="pl-5">
+            <div className="py-1">
+              <label>
+                Vegetarian
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
+              </label>
+              <input
+                type="text"
+                id="vegetarian"
+                name="vegetarian"
+                defaultValue={userData?.vegetarian}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={mixGender}
-                  onChange={(e) => setMixGender(e.target.checked)}
-                />
-                <span className="pl-2">Mixed Gender</span>
+                Pets
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="pets"
+                name="pets"
+                defaultValue={userData?.pets}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
             <div className="py-1">
               <label>
-                <input
-                  type="checkbox"
-                  checked={vegetarian}
-                  onChange={(e) => setVegetarian(e.target.checked)}
-                />
-                <span className="pl-2">Vegetarian</span>
+                Messy
+                <br />
+                <span className="text-xs text-gray-500">(true or false)</span>
               </label>
+              <input
+                type="text"
+                id="messy"
+                name="messy"
+                defaultValue={userData?.messy}
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+              />
             </div>
           </div>
         </div>
         <button
-          className="bg-[#F65B5B] text-white px-4 py-2 rounded-lg mt-5 ml-5"
+          className="bg-[#F65B5B] w-full text-white px-4 py-2 rounded-lg mt-5 ml-5"
           type="submit">
           Submit
         </button>

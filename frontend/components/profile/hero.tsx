@@ -30,7 +30,9 @@ const Hero = () => {
   return (
     <div className="flex p-10 justify-around">
       <div>
-        <h1 className="text-3xl font-bold pb-5">Welcome, John</h1>
+        <h1 className="text-3xl font-bold pb-5">
+          Welcome, {userData?.firstName}
+        </h1>
         <Image src={man} alt="Profile" width={300} height={300} />
         <div className="py-4">
           <h1 className="text-xl font-medium py-3">
@@ -42,7 +44,7 @@ const Hero = () => {
           <h1 className="text-xl font-medium py-3">
             Username:{' '}
             <span className="bg-[#F65B5B] text-white py-2 px-5 rounded-lg">
-              JohnDoe
+              {userData?.id}
             </span>
           </h1>
           <h1 className="text-xl font-medium py-3">
@@ -56,7 +58,7 @@ const Hero = () => {
       <div>
         <div>
           <h1 className="text-3xl flex justify-start items-center font-bold pb-5 px-5">
-            <span>Interests/Preferences</span>
+            <span>User Details</span>
             <button
               onClick={() => setShowModal(!showModal)}
               className="pl-10 text-[#F65B5B] text-medium">
@@ -143,136 +145,91 @@ const Hero = () => {
             </div>
           </div>
           <div>
-            <div className="flex justify-start px-5 pt-5">
-              <div>
-                <div className="flex items-center">
-                  <input
-                    id="morning-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.morningPerson}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label
-                    htmlFor="link-checkbox"
-                    className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
-                    Morning Person
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="evening-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.eveningPerson}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+            <div className="pl-5 pt-5">Preferences</div>
+            <div className="flex items-center">
+              {userData.morningPerson === 'true' && (
+                <label
+                  htmlFor="link-checkbox"
+                  className="ml-6 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
+                  Morning Person
+                </label>
+              )}
+
+              <div className="flex items-center">
+                {userData.eveningPerson === 'true' && (
                   <label
                     htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Evening Person
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="drinking-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.drinking}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+              <div className="flex items-center">
+                {userData.drinking === 'true' && (
                   <label
                     htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Drinking
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="smoking-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.smoking}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+              <div className="flex items-center">
+                {userData.smoking === 'true' && (
                   <label
                     htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Smoking
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="link-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.pets}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+              <div className="flex items-center">
+                {userData.pets === 'true' && (
                   <label
-                    htmlFor="pets-checkbox"
+                    htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Pets
                   </label>
-                </div>
+                )}
               </div>
-              <div className="pl-5">
-                <div className="flex items-center">
-                  <input
-                    id="messy-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.messy}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+            </div>
+            <div className="pl-5">
+              <div className="flex items-center">
+                {userData.messy === 'true' && (
                   <label
                     htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Messy
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="link-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.clean}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+
+              <div className="flex items-center">
+                {userData.clean === 'true' && (
                   <label
-                    htmlFor="clean-checkbox"
+                    htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Clean
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="link-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.mixedGender}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+
+              <div className="flex items-center">
+                {userData.mixedGender === 'true' && (
                   <label
-                    htmlFor="gender-checkbox"
+                    htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Mixed Gender
                   </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    id="link-checkbox"
-                    type="checkbox"
-                    disabled
-                    value={userData.vegetarian}
-                    className="w-4 h-4 text-[#F65B5B] bg-gray-100 border-gray-300 rounded  focus:ring-[#F65B5B] dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
+                )}
+              </div>
+              <div className="flex items-center">
+                {userData.vegetarian === 'true' && (
                   <label
-                    htmlFor="food-checkbox"
+                    htmlFor="link-checkbox"
                     className="ml-2 text-sm font-medium text-[#F65B5B] pr-2 pl-0 py-2">
                     Vegetarian
                   </label>
-                </div>
+                )}
               </div>
             </div>
           </div>
