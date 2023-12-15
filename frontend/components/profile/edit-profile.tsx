@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const EditProfile = () => {
   const [area, setArea] = useState('');
@@ -8,6 +9,7 @@ const EditProfile = () => {
   const [firstName, setfirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [interests, setInterests] = useState('');
+  const [userData, setUserData] = useState();
 
   const [morningPerson, setMorningPerson] = useState(false);
   const [eveningPerson, setEveningPerson] = useState(false);
@@ -22,6 +24,22 @@ const EditProfile = () => {
   const id = localStorage.getItem(
     'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
   );
+
+  useEffect(() => {
+    const id = localStorage.getItem(
+      'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+    );
+    axios(
+      `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/user?id=${id}`
+    )
+      .then((res) => {
+        console.log(res.data);
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

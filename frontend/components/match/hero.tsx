@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const Hero = () => {
   const [users, setUsers] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios(
@@ -17,16 +18,21 @@ const Hero = () => {
       .then((res) => {
         console.log(res.data.body);
         setUsers(res.data.body);
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false); // Set loading to false in case of an error
       });
   }, []);
 
   return (
     <div className="flex justify-center items-center">
       <div className="p-10">
-        {users &&
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          users &&
           users?.map((user) => {
             return (
               <div key={user.id}>
@@ -65,7 +71,8 @@ const Hero = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
     </div>
   );

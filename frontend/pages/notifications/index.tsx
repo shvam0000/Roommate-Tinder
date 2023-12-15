@@ -12,7 +12,7 @@ const Notifications = () => {
     <Layout>
       <ProtectedRoute>
         <div className="flex justify-center items-center">
-          <div className="bg-[#f8caca] rounded-lg">
+          <div className="rounded-lg">
             <figure className="flex justify-center">
               <Image src={man2} alt="man2" />
             </figure>

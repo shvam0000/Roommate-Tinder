@@ -37,6 +37,11 @@ const Navbar = () => {
                   Notifications
                 </button>
               </Link>
+              <Link href="/chat" className="px-2">
+                <button className="mx-5 px-3 py-2 border-b-2 hover:border-[#F65B5B]  text-black text-md">
+                  Chat
+                </button>
+              </Link>
               <button
                 onClick={() => handleSingout()}
                 className="mx-5 py-2 px-3 border-b-2 hover:border-[#F65B5B] focus:border- text-black text-md">
