@@ -87,7 +87,9 @@ const Hero = () => {
     <div className="flex justify-center items-center">
       <div className="p-10">
         {loading ? (
-          <p>Loading...</p>
+          <div className="h-screen w-screen flex justify-center items-center text-2xl">
+            Loading...
+          </div>
         ) : (
           users.length > 0 && (
             <animated.div style={fadeAnimation}>

@@ -13,6 +13,32 @@ const Notifications = () => {
   const [likedUserProfiles, setLikedUserProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const handleLike = (userId) => {
+    // Handle dislike action
+    // alert(`Disliked user with ID: ${userId}`);
+    axios
+      .post(
+        `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/match`,
+        {
+          id: localStorage.getItem(
+            'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+          ),
+          user_id_to_like: userId,
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDislike = (userId) => {
+    // Handle like action
+    alert(`Liked user with ID: ${userId}`);
+  };
+
   useEffect(() => {
     const id = localStorage.getItem(
       'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
@@ -48,7 +74,16 @@ const Notifications = () => {
     <Layout>
       <ProtectedRoute>
         {/* Display loading screen while data is being fetched */}
-        {loading && <div>Loading...</div>}
+        {loading && (
+          <div className="h-screen w-screen flex justify-center items-center text-2xl">
+            Loading...
+          </div>
+        )}
+        {!loading && likedUserProfiles?.length === 0 && (
+          <div className="h-screen w-screen flex justify-center items-center text-2xl">
+            No likes found.
+          </div>
+        )}
 
         {/* Loop through likedUserProfiles and display their profiles */}
         {!loading &&
@@ -60,15 +95,18 @@ const Notifications = () => {
                 <figure className="flex justify-center">
                   <Image src={man2} alt="man2" />
                 </figure>
-                {/* Add appropriate logic for dislike and like buttons for each profile */}
                 <div className="flex justify-center">
                   <Link href="/match">
-                    <figure className="px-2 py-2">
+                    <figure
+                      className="px-2 py-2"
+                      onClick={() => handleDislike(profile.id)}>
                       <Image src={dislike} alt="dislike" />
                     </figure>
                   </Link>
                   <Link href="/match">
-                    <figure className="px-2 py-2">
+                    <figure
+                      className="px-2 py-2"
+                      onClick={() => handleLike(profile.id)}>
                       <Image src={like} alt="like" />
                     </figure>
                   </Link>
@@ -85,7 +123,6 @@ const Notifications = () => {
                       ? 'Non Drinker'
                       : 'Drinker'}
                   </li>
-                  {/* Add other profile details as needed */}
                 </ul>
               </div>
             </div>
