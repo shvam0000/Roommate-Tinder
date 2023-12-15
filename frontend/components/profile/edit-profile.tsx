@@ -42,6 +42,7 @@ const EditProfile = () => {
     const clean = e.target.clean.value;
     const mixedGender = e.target.mixedGender.value;
     const vegetarian = e.target.vegetarian.value;
+    const gender = e.target.gender.value;
 
     const data = {
       firstName,
@@ -60,6 +61,7 @@ const EditProfile = () => {
       clean,
       mixedGender,
       vegetarian,
+      gender,
     };
 
     try {
@@ -108,6 +110,16 @@ const EditProfile = () => {
               id="lastName"
               name="lastName"
               defaultValue={userData?.lastName}
+              className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+            />
+          </div>
+          <div className="px-5">
+            <label htmlFor="lastName">Gender</label>
+            <input
+              type="text"
+              id="gender"
+              name="gender"
+              defaultValue={userData?.gender}
               className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
             />
           </div>

@@ -10,11 +10,16 @@ import axios from 'axios';
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({});
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     const id = localStorage.getItem(
       'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
     );
+
+    const _email = localStorage.getItem('email');
+    setEmail(_email);
+
     axios(
       `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/user?id=${id}`
     )
@@ -38,19 +43,13 @@ const Hero = () => {
           <h1 className="text-xl font-medium py-3">
             Email:{' '}
             <span className="bg-[#F65B5B] text-white py-2 px-5 rounded-lg">
-              john@gmail.com
+              {email}
             </span>
           </h1>
           <h1 className="text-xl font-medium py-3">
             Username:{' '}
             <span className="bg-[#F65B5B] text-white py-2 px-5 rounded-lg">
               {userData?.id}
-            </span>
-          </h1>
-          <h1 className="text-xl font-medium py-3">
-            Gender:{' '}
-            <span className="bg-[#F65B5B] text-white py-2 px-5 rounded-lg">
-              Male
             </span>
           </h1>
         </div>
@@ -84,6 +83,16 @@ const Hero = () => {
                 placeholder="Doe"
                 disabled
                 value={userData.lastName}
+              />
+            </div>
+            <div className="px-5">
+              <label htmlFor="lname">Gender</label>
+              <input
+                type="text"
+                className=" border sm:text-sm rounded-lg block w-full p-2.5 bg-white border-gray-600 placeholder-gray-400"
+                placeholder="Doe"
+                disabled
+                value={userData.gender}
               />
             </div>
           </div>
