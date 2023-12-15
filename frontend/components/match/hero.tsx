@@ -5,6 +5,8 @@ import dislike from '@/utils/images/dislike.png';
 import like from '@/utils/images/like.png';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useSpring, animated } from 'react-spring';
 
@@ -36,12 +38,14 @@ const Hero = () => {
       )
       .then((res) => {
         console.log(res.data);
+        toast.success('Liked!');
         // Move to the next user
         setCurrentUserIndex((prevIndex) =>
           prevIndex + 1 < users.length ? prevIndex + 1 : prevIndex
         );
       })
       .catch((err) => {
+        toast.error(err.message);
         console.log(err);
       });
   };
@@ -59,12 +63,14 @@ const Hero = () => {
       )
       .then((res) => {
         console.log(res.data);
+        toast.success('Disliked!');
         // Move to the next user
         setCurrentUserIndex((prevIndex) =>
           prevIndex + 1 < users.length ? prevIndex + 1 : prevIndex
         );
       })
       .catch((err) => {
+        toast.error(err.message);
         console.log(err);
       });
   };
@@ -145,6 +151,7 @@ const Hero = () => {
             </animated.div>
           )
         )}
+        <ToastContainer />
       </div>
     </div>
   );

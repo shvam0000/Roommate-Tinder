@@ -8,6 +8,8 @@ import man2 from '@/utils/images/man2.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Notifications = () => {
   const [likedUserProfiles, setLikedUserProfiles] = useState([]);
@@ -27,16 +29,37 @@ const Notifications = () => {
         }
       )
       .then((res) => {
+        toast.success('Its a match');
         console.log(res);
       })
       .catch((err) => {
+        toast.error(err.message);
         console.log(err);
       });
   };
 
   const handleDislike = (userId) => {
     // Handle like action
-    alert(`Liked user with ID: ${userId}`);
+    // alert(`Liked user with ID: ${userId}`);
+
+    axios
+      .post(
+        `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/unmatch`,
+        {
+          id: localStorage.getItem(
+            'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+          ),
+          user_id_to_unmatch: userId,
+        }
+      )
+      .then((res) => {
+        toast.success('Unmatched');
+        console.log(res);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -125,6 +148,7 @@ const Notifications = () => {
                   </li>
                 </ul>
               </div>
+              <ToastContainer />
             </div>
           ))}
       </ProtectedRoute>
