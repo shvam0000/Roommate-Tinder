@@ -116,91 +116,93 @@ const Hero = () => {
           <div className="h-screen w-screen flex justify-center items-center text-2xl">
             Loading...
           </div>
-        ) : (
-          users?.length > 0 && (
-            <animated.div style={fadeAnimation}>
-              <animated.div style={slideAnimation}>
-                <div key={users[currentUserIndex].metadata.id}>
-                  <div className="bg-[#f8caca] mx-auto p-10 rounded-lg">
-                    <figure className="flex justify-center">
-                      <Image src={man2} alt="man2" />
-                    </figure>
-                    <div className="flex justify-center">
-                      <Link href="/match">
-                        <figure
-                          className="px-2 py-2"
-                          onClick={() =>
-                            handleDislike(users[currentUserIndex].metadata.id)
-                          }>
-                          <Image src={dislike} alt="dislike" />
-                        </figure>
-                      </Link>
-                      <Link href="/match">
-                        <figure
-                          className="px-2 py-2"
-                          onClick={() =>
-                            handleLike(users[currentUserIndex].metadata.id)
-                          }>
-                          <Image src={like} alt="like" />
-                        </figure>
-                      </Link>
-                    </div>
-                    <h1 className="text-2xl font-bold">
-                      {users[currentUserIndex].metadata.firstName}{' '}
-                      {users[currentUserIndex].metadata.lastName},{' '}
-                      {users[currentUserIndex].metadata.age},{' '}
-                      {users[currentUserIndex].metadata.gender}
-                    </h1>
-                    <ul className="text-lg font-medium">
-                      <li className="list-disc">
-                        Interests: {users[currentUserIndex].metadata.interests}
-                      </li>
-                      <li className="list-disc">
-                        MinPrice: ${users[currentUserIndex].metadata.minPrice}
-                      </li>
-                      <li className="list-disc">
-                        MaxPrice: ${users[currentUserIndex].metadata.maxPrice}
-                      </li>
-                      <li className="list-disc">
-                        Area: {users[currentUserIndex].metadata.area}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.morningPerson ===
-                        'false'
-                          ? 'Evening Person'
-                          : 'Morning Person'}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.smoking === 'false'
-                          ? 'Does not smoke'
-                          : 'Smoker'}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.drinking !== 'false'
-                          ? 'Drinker'
-                          : 'Does not drink'}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.clean !== 'false'
-                          ? 'Clean'
-                          : 'Messy'}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.pets !== 'false'
-                          ? 'Has pets'
-                          : 'No pets'}
-                      </li>
-                      <li className="list-disc">
-                        {users[currentUserIndex].metadata.vegetarian !== 'false'
-                          ? 'Vegetarian'
-                          : 'Non vegetarian'}
-                      </li>
-                    </ul>
+        ) : users?.length > 0 ? (
+          <animated.div style={fadeAnimation}>
+            <animated.div style={slideAnimation}>
+              <div key={users[currentUserIndex].metadata.id}>
+                <div className="bg-[#f8caca] mx-auto p-10 rounded-lg">
+                  <figure className="flex justify-center">
+                    <Image src={man2} alt="man2" />
+                  </figure>
+                  <div className="flex justify-center">
+                    <Link href="/match">
+                      <figure
+                        className="px-2 py-2"
+                        onClick={() =>
+                          handleDislike(users[currentUserIndex].metadata.id)
+                        }>
+                        <Image src={dislike} alt="dislike" />
+                      </figure>
+                    </Link>
+                    <Link href="/match">
+                      <figure
+                        className="px-2 py-2"
+                        onClick={() =>
+                          handleLike(users[currentUserIndex].metadata.id)
+                        }>
+                        <Image src={like} alt="like" />
+                      </figure>
+                    </Link>
                   </div>
+                  <h1 className="text-2xl font-bold">
+                    {users[currentUserIndex].metadata.firstName}{' '}
+                    {users[currentUserIndex].metadata.lastName},{' '}
+                    {users[currentUserIndex].metadata.age},{' '}
+                    {users[currentUserIndex].metadata.gender}
+                  </h1>
+                  <ul className="text-lg font-medium">
+                    <li className="list-disc">
+                      Interests: {users[currentUserIndex].metadata.interests}
+                    </li>
+                    <li className="list-disc">
+                      MinPrice: ${users[currentUserIndex].metadata.minPrice}
+                    </li>
+                    <li className="list-disc">
+                      MaxPrice: ${users[currentUserIndex].metadata.maxPrice}
+                    </li>
+                    <li className="list-disc">
+                      Area: {users[currentUserIndex].metadata.area}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.morningPerson ===
+                      'false'
+                        ? 'Evening Person'
+                        : 'Morning Person'}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.smoking === 'false'
+                        ? 'Does not smoke'
+                        : 'Smoker'}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.drinking !== 'false'
+                        ? 'Drinker'
+                        : 'Does not drink'}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.clean !== 'false'
+                        ? 'Clean'
+                        : 'Messy'}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.pets !== 'false'
+                        ? 'Has pets'
+                        : 'No pets'}
+                    </li>
+                    <li className="list-disc">
+                      {users[currentUserIndex].metadata.vegetarian !== 'false'
+                        ? 'Vegetarian'
+                        : 'Non vegetarian'}
+                    </li>
+                  </ul>
                 </div>
-              </animated.div>
+              </div>
             </animated.div>
-          )
+          </animated.div>
+        ) : (
+          <div className="h-screen w-screen flex justify-center items-center text-2xl">
+            No matches found.
+          </div>
         )}
         <ToastContainer />
       </div>
