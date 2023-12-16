@@ -110,7 +110,7 @@ const Hero = () => {
             Loading...
           </div>
         ) : (
-          users.length > 0 && (
+          users?.length > 0 && (
             <animated.div style={fadeAnimation}>
               <animated.div style={slideAnimation}>
                 <div key={users[currentUserIndex].metadata.id}>
