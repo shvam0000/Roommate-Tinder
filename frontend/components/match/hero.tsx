@@ -14,6 +14,7 @@ const Hero = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentUserIndex, setCurrentUserIndex] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   const fadeAnimation = useSpring({
     opacity: 1,
@@ -38,6 +39,7 @@ const Hero = () => {
       )
       .then((res) => {
         console.log(res.data);
+        setCounter(counter + 1);
         toast.success('Liked!');
         // Move to the next user
         setCurrentUserIndex((prevIndex) =>
@@ -63,6 +65,7 @@ const Hero = () => {
       )
       .then((res) => {
         console.log(res.data);
+        setCounter(counter + 1);
         toast.success('Disliked!');
         // Move to the next user
         setCurrentUserIndex((prevIndex) =>
@@ -100,7 +103,11 @@ const Hero = () => {
         console.log(err);
         setLoading(false);
       });
-  }, []);
+
+    if (counter === 5) {
+      window.location.reload();
+    }
+  }, [counter]);
 
   return (
     <div className="flex justify-center items-center">
@@ -139,7 +146,8 @@ const Hero = () => {
                       </Link>
                     </div>
                     <h1 className="text-2xl font-bold">
-                      {users[currentUserIndex].metadata.firstName},{' '}
+                      {users[currentUserIndex].metadata.firstName}{' '}
+                      {users[currentUserIndex].metadata.lastName},{' '}
                       {users[currentUserIndex].metadata.age},{' '}
                       {users[currentUserIndex].metadata.gender}
                     </h1>

@@ -56,9 +56,7 @@ const UserDetails = () => {
         `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/add-user?id=${id}`,
         {
           queryStringParameters: {
-            id: localStorage.getItem(
-              'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
-            ),
+            id: localStorage.getItem('username'),
           },
           body: JSON.stringify(data),
         }
@@ -75,7 +73,7 @@ const UserDetails = () => {
   };
 
   return (
-    <Layout>
+    <div>
       <form onSubmit={handleSubmit} className="w-3/4 mx-auto">
         <div className="flex justify-center items-center">
           Enter your details
@@ -353,7 +351,7 @@ const UserDetails = () => {
         </button>
       </form>
       <ToastContainer />
-    </Layout>
+    </div>
   );
 };
 

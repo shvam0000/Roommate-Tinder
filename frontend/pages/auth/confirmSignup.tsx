@@ -11,6 +11,7 @@ const ConfirmSignup = ({ username }: any) => {
   const [profileProcess, setProfileProcess] = useState(false);
 
   console.log('username', username);
+  localStorage.setItem('username', username);
   console.log('userPool', userPool);
 
   const user = new CognitoUser({
