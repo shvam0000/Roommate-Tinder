@@ -76,11 +76,24 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    axios(
-      'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/users'
-    )
+    const id = localStorage.getItem(
+      'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+    );
+
+    axios
+      .post(
+        `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/allusers?id=${id}`,
+        {
+          queryStringParameters: {
+            id: localStorage.getItem(
+              'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
+            ),
+          },
+        }
+      )
       .then((res) => {
-        setUsers(res.data.body);
+        setUsers(res.data.body.matches); // Updated to use res.data directly
+        console.log(res.data.body.matches);
         setLoading(false);
       })
       .catch((err) => {
@@ -100,7 +113,7 @@ const Hero = () => {
           users.length > 0 && (
             <animated.div style={fadeAnimation}>
               <animated.div style={slideAnimation}>
-                <div key={users[currentUserIndex].id}>
+                <div key={users[currentUserIndex].metadata.id}>
                   <div className="bg-[#f8caca] mx-auto p-10 rounded-lg">
                     <figure className="flex justify-center">
                       <Image src={man2} alt="man2" />
@@ -110,7 +123,7 @@ const Hero = () => {
                         <figure
                           className="px-2 py-2"
                           onClick={() =>
-                            handleDislike(users[currentUserIndex].id)
+                            handleDislike(users[currentUserIndex].metadata.id)
                           }>
                           <Image src={dislike} alt="dislike" />
                         </figure>
@@ -119,28 +132,30 @@ const Hero = () => {
                         <figure
                           className="px-2 py-2"
                           onClick={() =>
-                            handleLike(users[currentUserIndex].id)
+                            handleLike(users[currentUserIndex].metadata.id)
                           }>
                           <Image src={like} alt="like" />
                         </figure>
                       </Link>
                     </div>
                     <h1 className="text-2xl font-bold">
-                      {users[currentUserIndex].firstName},{' '}
-                      {users[currentUserIndex].age},{' '}
-                      {users[currentUserIndex].gender}
+                      {users[currentUserIndex].metadata.firstName},{' '}
+                      {users[currentUserIndex].metadata.age},{' '}
+                      {users[currentUserIndex].metadata.gender}
                     </h1>
                     <ul className="text-lg font-medium">
                       <li className="list-disc">
-                        Interests: {users[currentUserIndex].interests}
+                        Interests: {users[currentUserIndex].metadata.interests}
                       </li>
                       <li className="list-disc">
-                        {users[currentUserIndex].smoking === 'false_smoking'
+                        {users[currentUserIndex].metadata.smoking ===
+                        'false_smoking'
                           ? 'Non-Smoker'
                           : 'Smoker'}
                       </li>
                       <li className="list-disc">
-                        {users[currentUserIndex].drinking !== 'false_drinking'
+                        {users[currentUserIndex].metadata.drinking !==
+                        'false_drinking'
                           ? 'Drinker'
                           : 'Non-Drinker'}
                       </li>

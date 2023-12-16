@@ -16,8 +16,6 @@ const Notifications = () => {
   const [loading, setLoading] = useState(true);
 
   const handleLike = (userId) => {
-    // Handle dislike action
-    // alert(`Disliked user with ID: ${userId}`);
     axios
       .post(
         `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/match`,
