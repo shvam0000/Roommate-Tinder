@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProfile = () => {
   const [userData, setUserData] = useState();
@@ -64,28 +66,48 @@ const EditProfile = () => {
       gender,
     };
 
-    try {
-      const response = await fetch(
-        `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/update-user?id=${id}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        }
-      );
+    if (
+      (morningPerson === 'true' || morningPerson === 'false') &&
+      (eveningPerson === 'true' || eveningPerson === 'false') &&
+      (drinking === 'true' || drinking === 'false') &&
+      (smoking === 'true' || smoking === 'false') &&
+      (pets === 'true' || pets === 'false') &&
+      (messy === 'true' || messy === 'false') &&
+      (clean === 'true' || clean === 'false') &&
+      (mixedGender === 'true' || mixedGender === 'false') &&
+      (vegetarian === 'true' || vegetarian === 'false') &&
+      (area === 'Manhattan' ||
+        area === 'Brooklyn' ||
+        area === 'Bronx' ||
+        area === 'Queens') &&
+      (gender === 'Male' || gender === 'Female') &&
+      maxPrice > minPrice
+    ) {
+      try {
+        const response = await fetch(
+          `https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/update-user?id=${id}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          }
+        );
 
-      if (response.ok) {
-        console.log('Profile submitted successfully');
-        // You can handle success, such as redirecting or showing a success message
-        window.location.reload();
-      } else {
-        console.error('Failed to submit profile');
-        // Handle error, show an error message, etc.
+        if (response.ok) {
+          console.log('Profile submitted successfully');
+          // You can handle success, such as redirecting or showing a success message
+          window.location.reload();
+        } else {
+          console.error('Failed to submit profile');
+          // Handle error, show an error message, etc.
+        }
+      } catch (error) {
+        console.error('Error submitting profile:', error);
       }
-    } catch (error) {
-      console.error('Error submitting profile:', error);
+    } else {
+      toast.error('Please enter correct schema');
     }
   };
 
@@ -96,6 +118,7 @@ const EditProfile = () => {
           <div className="px-5">
             <label htmlFor="firstName">First Name</label>
             <input
+              required
               type="text"
               id="firstName"
               name="firstName"
@@ -106,6 +129,7 @@ const EditProfile = () => {
           <div className="px-5">
             <label htmlFor="lastName">Last Name</label>
             <input
+              required
               type="text"
               id="lastName"
               name="lastName"
@@ -116,6 +140,7 @@ const EditProfile = () => {
           <div className="px-5">
             <label htmlFor="lastName">Gender</label>
             <input
+              required
               type="text"
               id="gender"
               name="gender"
@@ -133,6 +158,7 @@ const EditProfile = () => {
               </span>
             </label>
             <input
+              required
               type="text"
               id="area"
               name="area"
@@ -149,6 +175,7 @@ const EditProfile = () => {
               <span className="text-xs text-gray-500"> </span>
             </label>
             <input
+              required
               type="number"
               id="age"
               name="age"
@@ -161,6 +188,7 @@ const EditProfile = () => {
           <div className="px-5">
             <label htmlFor="min-price">Min Price</label>
             <input
+              required
               type="number"
               id="min-price"
               name="minPrice"
@@ -171,6 +199,7 @@ const EditProfile = () => {
           <div className="px-5">
             <label htmlFor="max-price">Max Price</label>
             <input
+              required
               type="number"
               id="max-price"
               name="maxPrice"
@@ -182,6 +211,7 @@ const EditProfile = () => {
         <div className="px-5 w-[85.5%]">
           <label htmlFor="interests">Interests</label>
           <input
+            required
             type="text"
             id="interests"
             name="interests"
@@ -199,6 +229,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="morningPerson"
                 name="morningPerson"
@@ -213,6 +244,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="eveningPerson"
                 name="eveningPerson"
@@ -227,6 +259,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="drinking"
                 name="drinking"
@@ -243,6 +276,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="clean"
                 name="clean"
@@ -257,6 +291,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="mixedGender"
                 name="mixedGender"
@@ -271,6 +306,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="smoking"
                 name="smoking"
@@ -287,6 +323,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="vegetarian"
                 name="vegetarian"
@@ -301,6 +338,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="pets"
                 name="pets"
@@ -315,6 +353,7 @@ const EditProfile = () => {
                 <span className="text-xs text-gray-500">(true or false)</span>
               </label>
               <input
+                required
                 type="text"
                 id="messy"
                 name="messy"
@@ -330,6 +369,7 @@ const EditProfile = () => {
           Submit
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
