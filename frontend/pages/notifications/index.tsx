@@ -132,17 +132,35 @@ const Notifications = () => {
                     </figure>
                   </Link>
                 </div>
-                <h1 className="text-2xl font-bold">{`${profile.firstName}, ${profile.age}`}</h1>
+                <h1 className="text-2xl font-bold">{`${profile.firstName}, ${profile.age}, ${profile.gender}`}</h1>
                 <ul className="text-lg font-medium">
+                  <li className="list-disc">Interests: {profile.interests}</li>
+                  <li className="list-disc">Max Price: {profile.maxPrice}</li>
+                  <li className="list-disc">Min Price: {profile.minPrice}</li>
+                  <li className="list-disc">Area: {profile.area}</li>
                   <li className="list-disc">
-                    {profile.occupation === 'false_smoking'
-                      ? 'Non Smoker'
-                      : 'Smoker'}
+                    {profile.morningPerson === 'false'
+                      ? 'Evening Person'
+                      : 'Morning Person'}
                   </li>
                   <li className="list-disc">
-                    {profile.occupation === 'false_drinking'
-                      ? 'Non Drinker'
-                      : 'Drinker'}
+                    {profile.clean === 'false' ? 'Messy' : 'Clean'}
+                  </li>
+                  <li className="list-disc">
+                    {profile.drinking === 'false' ? 'Non Drinker' : 'Drinker'}
+                  </li>
+                  <li className="list-disc">
+                    {profile.smoking === 'false' ? 'Non Smoker' : 'Smoker'}
+                  </li>
+                  <li className="list-disc">
+                    {profile.pets === 'false'
+                      ? 'Does not have pets'
+                      : 'Has pets'}
+                  </li>
+                  <li className="list-disc">
+                    {profile.vegetarian === 'false'
+                      ? 'Non Vegetarian'
+                      : 'Vegetarian'}
                   </li>
                 </ul>
               </div>
