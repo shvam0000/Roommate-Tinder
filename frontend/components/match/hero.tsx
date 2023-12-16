@@ -148,16 +148,44 @@ const Hero = () => {
                         Interests: {users[currentUserIndex].metadata.interests}
                       </li>
                       <li className="list-disc">
-                        {users[currentUserIndex].metadata.smoking ===
-                        'false_smoking'
-                          ? 'Non-Smoker'
+                        MinPrice: ${users[currentUserIndex].metadata.minPrice}
+                      </li>
+                      <li className="list-disc">
+                        MaxPrice: ${users[currentUserIndex].metadata.maxPrice}
+                      </li>
+                      <li className="list-disc">
+                        Area: {users[currentUserIndex].metadata.area}
+                      </li>
+                      <li className="list-disc">
+                        {users[currentUserIndex].metadata.morningPerson ===
+                        'false'
+                          ? 'Evening Person'
+                          : 'Morning Person'}
+                      </li>
+                      <li className="list-disc">
+                        {users[currentUserIndex].metadata.smoking === 'false'
+                          ? 'Does not smoke'
                           : 'Smoker'}
                       </li>
                       <li className="list-disc">
-                        {users[currentUserIndex].metadata.drinking !==
-                        'false_drinking'
+                        {users[currentUserIndex].metadata.drinking !== 'false'
                           ? 'Drinker'
-                          : 'Non-Drinker'}
+                          : 'Does not drink'}
+                      </li>
+                      <li className="list-disc">
+                        {users[currentUserIndex].metadata.clean !== 'false'
+                          ? 'Clean'
+                          : 'Messy'}
+                      </li>
+                      <li className="list-disc">
+                        {users[currentUserIndex].metadata.pets !== 'false'
+                          ? 'Has pets'
+                          : 'No pets'}
+                      </li>
+                      <li className="list-disc">
+                        {users[currentUserIndex].metadata.vegetarian !== 'false'
+                          ? 'Vegetarian'
+                          : 'Non vegetarian'}
                       </li>
                     </ul>
                   </div>
