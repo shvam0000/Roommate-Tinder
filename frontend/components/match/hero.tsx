@@ -93,7 +93,7 @@ const Hero = () => {
       )
       .then((res) => {
         setUsers(res.data.body.matches); // Updated to use res.data directly
-        console.log(res.data.body.matches);
+        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => {

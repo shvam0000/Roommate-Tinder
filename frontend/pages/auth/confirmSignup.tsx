@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import userPool from '@/context/user-pool/user-pool';
 import { Hero } from '@/components/home';
+import { UserDetails } from '@/components/auth';
 
 const ConfirmSignup = ({ username }: any) => {
   const [OTP, setOTP] = useState<string>('');
@@ -101,7 +102,7 @@ const ConfirmSignup = ({ username }: any) => {
           </div>
         </div>
       ) : (
-        <Hero />
+        <UserDetails />
       )}
       <ToastContainer />
     </div>
