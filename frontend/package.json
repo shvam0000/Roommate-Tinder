@@ -12,6 +12,7 @@
     "amazon-cognito-identity-js": "^6.3.7",
     "axios": "^1.6.2",
     "next": "14.0.1",
+    "next-s3-upload": "^0.3.4",
     "nextjs-toploader": "^1.6.4",
     "react": "^18",
     "react-dom": "^18",

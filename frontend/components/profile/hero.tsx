@@ -4,18 +4,22 @@ import Image from 'next/image';
 import { Edit } from '@/utils/icons';
 import Modal from 'react-lean-modal';
 import { EditProfile } from '.';
-
+import { useS3Upload } from 'next-s3-upload';
 import axios from 'axios';
 
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({});
   const [email, setEmail] = useState('');
+  let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
+  let [imageUrl, setImageUrl] = useState();
+  const [uid, setUid] = useState();
 
   useEffect(() => {
     const id = localStorage.getItem(
       'CognitoIdentityServiceProvider.va7i8r6ptmr6roqha7m6v09ke.LastAuthUser'
     );
+    setUid(id);
 
     const _email = localStorage.getItem('email');
     setEmail(_email);
@@ -32,13 +36,50 @@ const Hero = () => {
       });
   }, []);
 
+  let handleFileChange = async (file) => {
+    let { url } = await uploadToS3(file);
+    console.log(url);
+    setImageUrl(url);
+    if (url) {
+      axios
+        .post(
+          'https://yclsvhn0s1.execute-api.us-east-1.amazonaws.com/roommate-tinder/upload-photo',
+          {
+            id: uid,
+            url: url,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <div className="flex p-10 justify-around">
       <div>
         <h1 className="text-3xl font-bold pb-5">
           Welcome, {userData?.firstName}
         </h1>
-        <Image src={man} alt="Profile" width={300} height={300} />
+        {imageUrl ? (
+          <img src={imageUrl || man} alt="Profile" width={300} height={300} />
+        ) : (
+          <img src={userData?.imgURL} alt="Profile" width={300} height={300} />
+        )}
+        {}
+        <div>
+          <FileInput onChange={handleFileChange} />
+
+          <button
+            className="py-2  my-4 text-white rounded-lg bg-[#F65B5B] px-4"
+            onClick={openFileDialog}>
+            Upload file
+          </button>
+        </div>
+
         <div className="py-4">
           <h1 className="text-xl font-medium py-3">
             Email:{' '}

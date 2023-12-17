@@ -122,7 +122,10 @@ const Hero = () => {
               <div key={users[currentUserIndex].metadata.id}>
                 <div className="bg-[#f8caca] mx-auto p-10 rounded-lg">
                   <figure className="flex justify-center">
-                    <Image src={man2} alt="man2" />
+                    <Image
+                      src={users[currentUserIndex].metadata.imgURL}
+                      alt="man2"
+                    />
                   </figure>
                   <div className="flex justify-center">
                     <Link href="/match">
