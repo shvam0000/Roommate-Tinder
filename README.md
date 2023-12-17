@@ -36,38 +36,6 @@ Roommate Tinder is a serverless web application built with AWS and NextJS. It he
 
 ## Installation 🔧
 
-### Server
-
-Server Directory
-
-```
-$ cd api
-```
-
-Install NodeJS dependencies
-
-```
-$ yarn install
-```
-
-or
-
-```
-$ npm install
-```
-
-Start the NodeJS server
-
-```
-$ npm start
-```
-
-or
-
-```
-$ yarn start
-```
-
 ### Client
 
 Client directory
