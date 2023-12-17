@@ -37,7 +37,16 @@ def lambda_handler(event, context):
         }
 
     user_details = response.get('Item')
-
+    new_user_details={}
+    for key in user_details:
+        value=user_details[key]
+        is_string=type(value)==str
+        if is_string and "true_" in value:
+            value="true"
+        elif is_string and "false_" in value:
+            value="false"
+        new_user_details[key]=value
+    user_details=new_user_details
     if not user_details:
         return {
             'statusCode': 404,

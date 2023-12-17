@@ -2,8 +2,30 @@ import json
 import boto3
 
 dynamodb = boto3.resource('dynamodb')
-table_name = 'Roommate-Tinder'  # Replace with your DynamoDB table name
+ses_client = boto3.client('ses')
+
+table_name = 'Roommate-Tinder'
 table = dynamodb.Table(table_name)
+
+def send_email_notification(user_id, matched_user_id):
+    # Customize the email message as per your requirement
+    subject = "New Match Notification"
+    message = f"Congratulations! You have a new match with User {matched_user_id} on Roommate-Tinder."
+
+    # Customize sender and recipient email addresses
+    sender_email = "ss6960@columbia.edu"
+    recipient_email = "ss6960@columbia.edu"
+
+    # Send the email
+    try:
+        response = ses_client.send_email(
+            Source=sender_email,
+            Destination={'ToAddresses': [recipient_email]},
+            Message={'Subject': {'Data': subject}, 'Body': {'Text': {'Data': message}}},
+        )
+        print("Email sent successfully:", response)
+    except Exception as e:
+        print("Failed to send email:", str(e))
 
 def lambda_handler(event, context):
     # Parse the user id from the Lambda event
@@ -47,6 +69,9 @@ def lambda_handler(event, context):
                             ':matches': matches
                         }
                     )
+
+                    # Send email notification upon successful match
+                    send_email_notification(user_id, user_id_to_like)
 
                     return {
                         'statusCode': 200,
