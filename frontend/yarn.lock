@@ -1374,6 +1374,13 @@
   dependencies:
     tslib "^2.4.0"
 
+"@talkjs/react@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@talkjs/react/-/react-0.1.4.tgz#f9068eee7e2617557c10a3f8eff8c50c0afcefbf"
+  integrity sha512-/6Feri/UDOMOB60yDGULV454l/aFEFVk74X4U0i+yKYbJHrWrWs4nBtg5ojqITx2l+6qZ+ynBrLhJ+kEDIEx3A==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
@@ -3688,6 +3695,11 @@ tailwindcss@^3.3.0:
     postcss-selector-parser "^6.0.11"
     resolve "^1.22.2"
     sucrase "^3.32.0"
+
+talkjs@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/talkjs/-/talkjs-0.18.0.tgz#a88d781fa4fd9bb0ae745bb8c85795b12002523a"
+  integrity sha512-HfdFx0cRdBrYH+IR6a4jW/MbYZKRKCaDj9tMJZC6SQeGwa5WmpLf7WUKlDpduvcolKh9C+5y6T3wcGTExh4tog==
 
 tapable@^2.2.0:
   version "2.2.1"
