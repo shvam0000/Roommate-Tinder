@@ -29,7 +29,7 @@ const Chat = () => {
       .then((responses) => {
         const likedProfiles = responses.map((response) => response.data);
         console.log(likedProfiles);
-        setMatchedUserProfiles(matchedUserProfiles); // Fix: set matchedUserProfiles instead of matchedUserProfiles
+        setMatchedUserProfiles(likedProfiles); // Fix: set matchedUserProfiles instead of matchedUserProfiles
       })
       .catch((err) => {
         console.log(err);
@@ -39,16 +39,18 @@ const Chat = () => {
   return (
     <Layout>
       <ProtectedRoute>
-        {/* Display user profiles */}
-        {matchedUserProfiles.map((profile) => (
-          <div key={profile.id}>
-            <h2>
-              {profile.firstName} {profile.lastName}
-            </h2>
-            <p>Email: {profile.email}</p>
-            {/* Add more fields as needed */}
-          </div>
-        ))}
+        <div className="h-screen">
+          <h1 className="flex justify-center items-center font-bold text-xl">
+            Matched Users
+          </h1>
+          {matchedUserProfiles.map((profile) => (
+            <div key={profile.id}>
+              <h2 className="pl-10">
+                {profile.firstName} {profile.lastName}
+              </h2>
+            </div>
+          ))}
+        </div>
       </ProtectedRoute>
     </Layout>
   );
