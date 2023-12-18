@@ -84,11 +84,13 @@ const Chat = () => {
             Matched Users
           </h1>
           {matchedUserProfiles.map((profile) => (
-            <div key={profile.id}>
+            <div className="flex items-center" key={profile.id}>
               <h2 className="pl-10">
                 {profile.firstName} {profile.lastName}
               </h2>
-              <button className="px-4 py-2 bg-[#F65B5B] m-5" onClick={chat}>
+              <button
+                className="px-4 py-2 bg-[#F65B5B] text-white rounded-lg m-5"
+                onClick={chat}>
                 Chat
               </button>
             </div>
