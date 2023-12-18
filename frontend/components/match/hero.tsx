@@ -123,7 +123,7 @@ const Hero = () => {
                 <div className="bg-[#f8caca] mx-auto p-10 rounded-lg">
                   <figure className="flex justify-center">
                     <Image
-                      src={users[currentUserIndex].metadata.imgURL}
+                      src={users[currentUserIndex].metadata.imgURL || man2}
                       alt="man2"
                     />
                   </figure>
