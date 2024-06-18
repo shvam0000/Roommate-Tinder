@@ -23,6 +23,10 @@ Roommate Tinder is a serverless web application built with AWS and NextJS. It he
 
 <img src="https://github.com/shvam0000/Roommate-Tinder/blob/main/frontend/utils/images/2.png" alt="Roommate Tinder" height="500" width="1000">
 
+## 🏛️ Architecture Diagram
+
+![Roommate Tinder](https://github.com/shvam0000/Roommate-Tinder/assets/60486289/ed292154-6a00-4366-8071-74922ca23901)
+
 ## 📌 Prerequisites
 
 ### 💻 System requirement :
